@@ -1,14 +1,14 @@
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">PickList</span>
-        <span class="defaultText dispTable">PickList is used to reorder items between differents lists.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">PickList</span>
+        <span class="defaultText">PickList is used to reorder items between differents lists.</span>
     </div>
 </div>
 
 <div class="ContentSideSections Implementation">
     
-    <p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" sourceStyle="height:300px" targetStyle="height:300px">
-        <template #car>
+    <p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+        <template let-car>
             <li class="ui-picklist-item ui-helper-clearfix">
                 <img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/>
                 <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
@@ -34,7 +34,7 @@ import {PickList} from 'primeng/primeng';
 <pre>
 <code class="language-markup" pCode>
 &lt;p-pickList [source]="list1" [target]="list2"&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-picklist-item"&gt;
             Content of an item
         &lt;/li&gt;
@@ -145,7 +145,7 @@ export class MyComponent {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -194,8 +194,8 @@ export class MyComponent {
         <p-tabPanel header="Source">
 <pre>
 <code class="language-markup" pCode ngNonBindable>
-&lt;p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" sourceStyle="height:300px" targetStyle="height:300px"&gt;
-    &lt;template #car&gt;
+&lt;p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-picklist-item ui-helper-clearfix"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:14px;float:right;margin:15px 5px 0 0"&gt;{{car.brand}} - {{car.year}} - {{car.color}}&lt;/div&gt;

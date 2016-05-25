@@ -1,13 +1,13 @@
-import {Component,AfterViewInit,AfterViewChecked,Input,Output,EventEmitter,Query,QueryList,ElementRef} from 'angular2/core';
+import {Component,AfterViewInit,AfterViewChecked,Input,Output,EventEmitter,Query,QueryList,ElementRef} from '@angular/core';
 import {DomHandler} from '../dom/domhandler';
 
 @Component({
     selector: 'p-terminal',
     template: `
-        <div [ngClass]="'ui-terminal ui-widget ui-widget-content ui-corner-all'" [attr.style]="style" [attr.styleClass]="styleClass" (click)="focus(in)">
+        <div [ngClass]="'ui-terminal ui-widget ui-widget-content ui-corner-all'" [ngStyle]="style" [class]="styleClass" (click)="focus(in)">
             <div *ngIf="welcomeMessage">{{welcomeMessage}}</div>
             <div class="ui-terminal-content">
-                <div *ngFor="#command of commands">
+                <div *ngFor="let command of commands">
                     <span>{{prompt}}</span>
                     <span class="ui-terminal-command">{{command.text}}</span>
                     <div>{{command.response}}</div>
@@ -27,7 +27,7 @@ export class Terminal implements AfterViewInit,AfterViewChecked {
 
     @Input() prompt: string;
         
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
     

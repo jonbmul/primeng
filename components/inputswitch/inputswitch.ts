@@ -1,21 +1,18 @@
-import {Component,ElementRef,AfterViewInit,OnChanges,Input,forwardRef,Provider,EventEmitter,Output} from 'angular2/core';
-import {NG_VALUE_ACCESSOR,ControlValueAccessor} from 'angular2/common';
+import {Component,ElementRef,AfterViewInit,OnChanges,Input,forwardRef,Provider,EventEmitter,Output} from '@angular/core';
+import {NG_VALUE_ACCESSOR,ControlValueAccessor} from '@angular/common';
 import {DomHandler} from '../dom/domhandler';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
 
-const INPUTSWITCH_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => InputSwitch),
-        multi: true
-    })
-);
+const INPUTSWITCH_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => InputSwitch),
+    multi: true
+});
 
 @Component({
     selector: 'p-inputSwitch',
     template: `
         <div [ngClass]="{'ui-inputswitch ui-widget ui-widget-content ui-corner-all': true,
             'ui-state-disabled': disabled}" (click)="toggle($event, in)"
-            [attr.style]="style" [class]="styleClass">
+            [ngStyle]="style" [class]="styleClass">
             <div class="ui-inputswitch-off">
                 <span class="ui-inputswitch-offlabel">{{offLabel}}</span>
             </div>
@@ -38,13 +35,11 @@ export class InputSwitch implements ControlValueAccessor, AfterViewInit {
 
     @Input() disabled: boolean;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
 
     @Output() onChange: EventEmitter<any> = new EventEmitter();
-
-    value: boolean;
 
     checked: boolean = false;
 
@@ -159,11 +154,11 @@ export class InputSwitch implements ControlValueAccessor, AfterViewInit {
         this.onModelTouched();
     }
 
-    writeValue(value: any) : void {
-        this.value = value;
+    writeValue(checked: any) : void {
+        this.checked = checked;
         
         if(this.initialized) {
-            if(this.value === true)
+            if(this.checked === true)
                 this.checkUI();
             else
                 this.uncheckUI();

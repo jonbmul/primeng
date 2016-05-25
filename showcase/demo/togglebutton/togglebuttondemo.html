@@ -1,16 +1,16 @@
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">Togglebutton</span>
-        <span class="defaultText dispTable">ToggleButton is used to select a boolean value using a button.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">Togglebutton</span>
+        <span class="defaultText">ToggleButton is used to select a boolean value using a button.</span>
     </div>
 </div>
 
 <div class="ContentSideSections Implementation">
     <h3 class="first">Basic - ({{checked1}})</h3>
-    <p-toggleButton [(ngModel)]="checked1" style="width:150px"></p-toggleButton>
+    <p-toggleButton [(ngModel)]="checked1" [style]="{'width':'150px'}"></p-toggleButton>
 
     <h3>Customized - ({{checked2}})</h3>
-    <p-toggleButton [(ngModel)]="checked2" onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square" style="width:150px"></p-toggleButton>
+    <p-toggleButton [(ngModel)]="checked2" onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square" [style]="{'width':'150px'}"></p-toggleButton>
 </div>
 
 <div class="ContentSideSections Source">
@@ -165,7 +165,7 @@ export class ModelComponent {
 </pre>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -199,10 +199,10 @@ export class ModelComponent {
 <pre>
 <code class="language-markup" pCode ngNonBindable>
 &lt;h3 class="first"&gt;Basic - ({{checked1}})&lt;/h3&gt;
-&lt;p-toggleButton [(ngModel)]="checked1" style="width:150px"&gt;&lt;/p-toggleButton&gt;
+&lt;p-toggleButton [(ngModel)]="checked1" [style]="{'width':'150px'}"&gt;&lt;/p-toggleButton&gt;
 
 &lt;h3&gt;Customized - ({{checked2}})&lt;/h3&gt;
-&lt;p-toggleButton [(ngModel)]="checked2" onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square" style="width:150px"&gt;&lt;/p-toggleButton&gt;
+&lt;p-toggleButton [(ngModel)]="checked2" onLabel="I confirm" offLabel="I reject" onIcon="fa-check-square" offIcon="fa-square" [style]="{'width':'150px'}"&gt;&lt;/p-toggleButton&gt;
 </code>
 </pre>
 

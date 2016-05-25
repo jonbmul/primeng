@@ -1,11 +1,11 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Editor} from '../../../components/editor/editor';
-import {Header} from '../../../components/common/header';
+import {Header} from '../../../components/common';
 import {Button} from '../../../components/button/button';
 import {TabView} from '../../../components/tabview/tabview';
 import {TabPanel} from '../../../components/tabview/tabpanel';
 import {CodeHighlighter} from '../../../components/codehighlighter/codehighlighter';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
     templateUrl: 'showcase/demo/editor/editordemo.html',

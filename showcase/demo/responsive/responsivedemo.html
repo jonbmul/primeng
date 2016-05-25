@@ -12,9 +12,9 @@
     </style>
 
     <div class="ContentSideSections">
-        <div class="Content100 overHidden TextShadow">
-            <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">Responsive</span>
-            <span class="defaultText dispTable">.ui-fluid style class provides fluid width to components for efficient use of space in screen.
+        <div>
+            <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">Responsive</span>
+            <span class="defaultText">.ui-fluid style class provides fluid width to components for efficient use of space in screen.
                 This example demonstrates ui-fluid in combination with Grid CSS and the components having built-in responsive modes like datatable. Note that Grid CSS is not mandatory, any grid system 
                 can be used with ui-fluid.</span>
         </div>
@@ -153,7 +153,7 @@
                 but given to ruthless violence whenever anything stands against the good of the family.</p>
         </p-dialog>
 
-        <p-panel header="Panel" style="margin-top:20px">
+        <p-panel header="Panel" [style]="{'margin-top':'20px'}">
             The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -161,7 +161,7 @@
             but given to ruthless violence whenever anything stands against the good of the family.
         </p-panel>
 
-        <p-dataTable style="margin-top:20px" [value]="cars" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true">
+        <p-dataTable [style]="{'margin-top':'20px'}" [value]="cars" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true">
             <header>Cars</header>
             <p-column field="vin" header="Vin"></p-column>
             <p-column field="year" header="Year"></p-column>
@@ -169,13 +169,13 @@
             <p-column field="color" header="Color"></p-column>
         </p-dataTable>
 
-        <p-dataGrid style="margin-top:20px;margin-bottom:20px" [value]="cars" [columns]="5" [paginator]="true" [rows]="20">
+        <p-dataGrid [style]="{'margin-top':'20px','margin-bottom':'20px'}" [value]="cars" [columns]="5" [paginator]="true" [rows]="20">
             <header>
                 Datagrid
             </header>
-            <template #car>
+            <template let-car>
                 <div style="padding:3px">
-                    <p-panel [header]="car.vin" [paginator]="true" style="text-align:center">
+                    <p-panel [header]="car.vin" [paginator]="true" [style]="{'text-align':'center'}">
                         <img src="showcase/resources/demo/images/car/{{car.brand}}.gif">
                         <div class="car-detail">{{car.year}} - {{car.color}}</div>
                         <hr class="ui-widget-content" style="border-top:0">
@@ -184,10 +184,10 @@
             </template>
         </p-dataGrid>
 
-        <p-tree [value]="files" style="margin-top:20px;margin-bottom:20px"></p-tree>
+        <p-tree [value]="files" [style]="{'margin-top':'20px','margin-bottom':'20px'}"></p-tree>
 
-        <p-orderList [value]="cars" listStyle="height:250px" style="margin-top:20px;margin-bottom:20px" [responsive]="true" header="Responsive Cars">
-            <template #car>
+        <p-orderList [value]="cars" [listStyle]="{'height':'250px'}" [style]="{'margin-top':'20px','margin-bottom':'20px'}" [responsive]="true" header="Responsive Cars">
+            <template let-car>
                 <li class="ui-orderlist-item ui-helper-clearfix">
                     <img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/>
                     <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
@@ -195,12 +195,12 @@
             </template>
         </p-orderList>
 
-        <p-carousel headerText="Cars" [value]="cars2" style="margin-top:20px;margin-bottom:20px">
-            <template #car>
-                <li>
+        <p-carousel headerText="Cars" [value]="cars2" [style]="{'margin-top':'20px','margin-bottom':'20px'}">
+            <template let-car>
+                <li class="ui-carousel-item ui-widget-content ui-corner-all">
                     <div class="ui-grid ui-grid-responsive ui-grid-pad" style="text-align:center">
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-12" style="text-align:center"><img src="showcase/resources/demo/images/car/{{car.brand}}.gif" /></div>
+                            <div class="ui-grid-col-12"><img src="showcase/resources/demo/images/car/{{car.brand}}.gif" /></div>
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-6">Vin</div>
@@ -219,8 +219,9 @@
             </template>
         </p-carousel>
 
-        <p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" sourceStyle="height:300px" targetStyle="height:300px" style="margin-top:20px;margin-bottom:20px">
-            <template #car>
+        <p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" 
+            [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" [style]="{'margin-top':'20px','margin-bottom':'20px'}">
+            <template let-car>
                 <li class="ui-picklist-item ui-helper-clearfix">
                     <img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/>
                     <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
@@ -229,81 +230,11 @@
         </p-pickList>
         <div class="ui-grid ui-grid-responsive ui-grid-pad">
             <div class="ui-grid-row">
-                <div class="ui-grid-col-6">
-                    <p-menu>
-                        <ul>
-                            <li><h3>File</h3></li>
-                            <li><a data-icon="fa-plus"><span>New</span></a></li>
-                            <li><a data-icon="fa-download"><span>Open</span></a></li>
-                            <li><h3>Edit</h3></li>
-                            <li><a data-icon="fa-refresh"><span>Undo</span></a></li>
-                            <li><a data-icon="fa-repeat"><span>Redo</span></a></li>
-                        </ul>
-                    </p-menu>
+                <div class="ui-grid-col-4">
+                    <p-menu [model]="items1"></p-menu>
                 </div>
-                <div class="ui-grid-col-6">
-                    <p-panelMenu>
-                        <div>
-                            <div><a data-icon="fa-file-o"><span>File</span></a></div>
-                            <div>
-                                <ul>
-                                    <li><a data-icon="fa-plus"><span>New</span></a>
-                                        <ul>
-                                            <li><a><span>Project</span></a></li>
-                                            <li><a><span>Other</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a><span>Open</span></a></li>
-                                    <li><a><span>Quit</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <div><a data-icon="fa-edit"><span>Edit</span></a></div>
-                            <div>
-                                <ul>
-                                    <li><a data-icon="fa-mail-forward"><span>Undo</span></a></li>
-                                    <li><a data-icon="fa-mail-reply"><span>Redo</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <div><a data-icon="fa-question"><span>Help</span></a></div>
-                            <div>
-                                <ul>
-                                    <li><a><span>Contents</span></a></li>
-                                    <li><a data-icon="fa-search"><span>Search</span></a>
-                                        <ul>
-                                            <li><a><span>Text</span></a>
-                                                <ul>
-                                                    <li><a><span>Workspace</span></a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a><span>File</span></a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <div><a data-icon="fa-gear"><span>Actions</span></a></div>
-                            <div>
-                                <ul>
-                                    <li><a data-icon="fa-pencil"><span>Edit</span></a>
-                                        <ul>
-                                            <li><a data-icon="fa-save"><span>Save</span></a></li>
-                                            <li><a data-icon="fa-save"><span>Update</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a data-icon="fa-phone"><span>Other</span></a>
-                                        <ul>
-                                            <li><a data-icon="fa-minus"><span>Delete</span></a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </p-panelMenu>
+                <div class="ui-grid-col-8">
+                    <p-panelMenu [model]="items2"></p-panelMenu>
                 </div>
             </div>
         </div>
@@ -367,9 +298,9 @@
                 SplitButton
             &lt;/div&gt;
             &lt;div class="ui-grid-col-8"&gt;
-                &lt;p-splitButton label="Save" icon="fa-check" (onClick)="save()"&gt;
-                    &lt;p-splitButtonItem icon="fa-close" label="Delete" (onClick)="delete()"&gt;&lt;/p-splitButtonItem&gt;
-                    &lt;p-splitButtonItem icon="fa-refresh" label="Update" (onClick)="update()"&gt;&lt;/p-splitButtonItem&gt;
+                &lt;p-splitButton label="Save" icon="fa-check"&gt;
+                    &lt;p-splitButtonItem icon="fa-close" label="Delete"&gt;&lt;/p-splitButtonItem&gt;
+                    &lt;p-splitButtonItem icon="fa-refresh" label="Update"&gt;&lt;/p-splitButtonItem&gt;
                     &lt;p-splitButtonItem icon="fa-link" label="Angular.io" url="http://angular.io"&gt;&lt;/p-splitButtonItem&gt;
                 &lt;/p-splitButton&gt;
             &lt;/div&gt;
@@ -447,7 +378,7 @@
         but given to ruthless violence whenever anything stands against the good of the family.&lt;/p&gt;
 &lt;/p-dialog&gt;
 
-&lt;p-panel header="Panel" style="margin-top:20px"&gt;
+&lt;p-panel header="Panel" [style]="{'margin-top':'20px'}"&gt;
     The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
     His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
     Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -455,7 +386,7 @@
     but given to ruthless violence whenever anything stands against the good of the family.
 &lt;/p-panel&gt;
 
-&lt;p-dataTable style="margin-top:20px" [value]="cars" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true"&gt;
+&lt;p-dataTable [style]="{'margin-top':'20px'}" [value]="cars" [rows]="10" [paginator]="true" [pageLinks]="3" [responsive]="true"&gt;
     &lt;header&gt;Cars&lt;/header&gt;
     &lt;p-column field="vin" header="Vin"&gt;&lt;/p-column&gt;
     &lt;p-column field="year" header="Year"&gt;&lt;/p-column&gt;
@@ -463,13 +394,13 @@
     &lt;p-column field="color" header="Color"&gt;&lt;/p-column&gt;
 &lt;/p-dataTable&gt;
 
-&lt;p-dataGrid style="margin-top:20px;margin-bottom:20px" [value]="cars" [columns]="5" [paginator]="true" [rows]="20"&gt;
+&lt;p-dataGrid [style]="{'margin-top':'20px','margin-bottom':'20px'}" [value]="cars" [columns]="5" [paginator]="true" [rows]="20"&gt;
     &lt;header&gt;
         Datagrid
     &lt;/header&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div style="padding:3px"&gt;
-            &lt;p-panel [header]="car.vin" [paginator]="true" style="text-align:center"&gt;
+            &lt;p-panel [header]="car.vin" [paginator]="true" [style]="{'text-align':'center'}"&gt;
                 &lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif"&gt;
                 &lt;div class="car-detail"&gt;{{car.year}} - {{car.color}}&lt;/div&gt;
                 &lt;hr class="ui-widget-content" style="border-top:0"&gt;
@@ -478,10 +409,10 @@
     &lt;/template&gt;
 &lt;/p-dataGrid&gt;
 
-&lt;p-tree [value]="files" style="margin-top:20px;margin-bottom:20px"&gt;&lt;/p-tree&gt;
+&lt;p-tree [value]="files" [style]="{'margin-top':'20px','margin-bottom':'20px'}"&gt;&lt;/p-tree&gt;
 
-&lt;p-orderList [value]="cars" listStyle="height:250px" style="margin-top:20px;margin-bottom:20px" [responsive]="true" header="Responsive Cars"&gt;
-    &lt;template #car&gt;
+&lt;p-orderList [value]="cars" [listStyle]="{'height':'250px'}" [style]="{'margin-top':'20px','margin-bottom':'20px'}" [responsive]="true" header="Responsive Cars"&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-orderlist-item ui-helper-clearfix"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:14px;float:right;margin:15px 5px 0 0"&gt;{{car.brand}} - {{car.year}} - {{car.color}}&lt;/div&gt;
@@ -489,12 +420,12 @@
     &lt;/template&gt;
 &lt;/p-orderList&gt;
 
-&lt;p-carousel headerText="Cars" [value]="cars2" style="margin-top:20px;margin-bottom:20px"&gt;
-    &lt;template #car&gt;
-        &lt;li&gt;
+&lt;p-carousel headerText="Cars" [value]="cars2" [style]="{'margin-top':'20px','margin-bottom':'20px'}"&gt;
+    &lt;template let-car&gt;
+        &lt;li class="ui-carousel-item ui-widget-content ui-corner-all"&gt;
             &lt;div class="ui-grid ui-grid-responsive ui-grid-pad" style="text-align:center"&gt;
                 &lt;div class="ui-grid-row"&gt;
-                    &lt;div class="ui-grid-col-12" style="text-align:center"&gt;&lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif" /&gt;&lt;/div&gt;
+                    &lt;div class="ui-grid-col-12"&gt;&lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif" /&gt;&lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class="ui-grid-row"&gt;
                     &lt;div class="ui-grid-col-6"&gt;Vin&lt;/div&gt;
@@ -513,8 +444,9 @@
     &lt;/template&gt;
 &lt;/p-carousel&gt;
 
-&lt;p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" sourceStyle="height:300px" targetStyle="height:300px" style="margin-top:20px;margin-bottom:20px"&gt;
-    &lt;template #car&gt;
+&lt;p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" 
+    [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" [style]="{'margin-top':'20px','margin-bottom':'20px'}"&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-picklist-item ui-helper-clearfix"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:14px;float:right;margin:15px 5px 0 0"&gt;{{car.brand}} - {{car.year}} - {{car.color}}&lt;/div&gt;

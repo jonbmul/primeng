@@ -1,24 +1,21 @@
-import {Component,ElementRef,OnInit,AfterViewInit,AfterViewChecked,DoCheck,OnDestroy,Input,Output,Renderer,EventEmitter,ContentChild,TemplateRef,IterableDiffers,forwardRef,Provider} from 'angular2/core';
-import {SelectItem} from '../api/selectitem';
+import {Component,ElementRef,OnInit,AfterViewInit,AfterViewChecked,DoCheck,OnDestroy,Input,Output,Renderer,EventEmitter,ContentChild,TemplateRef,IterableDiffers,forwardRef,Provider} from '@angular/core';
+import {SelectItem} from '../common';
 import {DomHandler} from '../dom/domhandler';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
-const DROPDOWN_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => Dropdown),
-        multi: true
-    })
-);
+const DROPDOWN_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Dropdown),
+    multi: true
+});
 
 @Component({
     selector: 'p-dropdown',
     template: `
         <div [ngClass]="{'ui-dropdown ui-widget ui-state-default ui-corner-all ui-helper-clearfix':true,'ui-state-hover':hover&&!disabled,'ui-state-focus':focus,'ui-state-disabled':disabled}" 
-            (mouseenter)="onMouseenter($event)" (mouseleave)="onMouseleave($event)" (click)="onMouseclick($event,in)" [attr.style]="style" [class]="styleClass">
+            (mouseenter)="onMouseenter($event)" (mouseleave)="onMouseleave($event)" (click)="onMouseclick($event,in)" [ngStyle]="style" [class]="styleClass">
             <div class="ui-helper-hidden-accessible">
-                <select [required]="required">
-                    <option *ngFor="#option of options" [value]="option.value" [selected]="value == option.value">{{option.label}}</option>
+                <select [required]="required" tabindex="-1">
+                    <option *ngFor="let option of options" [value]="option.value" [selected]="value == option.value">{{option.label}}</option>
                 </select>
             </div>
             <div class="ui-helper-hidden-accessible">
@@ -37,7 +34,7 @@ const DROPDOWN_VALUE_ACCESSOR: Provider = CONST_EXPR(
                 <div class="ui-dropdown-items-wrapper" [style.max-height]="scrollHeight||'auto'">
                     <ul *ngIf="!itemTemplate" class="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset"
                         (mouseover)="onListMouseover($event)" (mouseout)="onListMouseout($event)">
-                        <li *ngFor="#option of optionsToDisplay;#i=index" [attr.data-label]="option.label" [attr.data-value]="option.value" (click)="onListClick($event)"
+                        <li *ngFor="let option of optionsToDisplay;let i=index" [attr.data-label]="option.label" [attr.data-value]="option.value" (click)="onListClick($event)"
                             class="ui-dropdown-item ui-corner-all">{{option.label}}</li>
                     </ul>
                     <ul *ngIf="itemTemplate" class="ui-dropdown-items ui-dropdown-list ui-widget-content ui-widget ui-corner-all ui-helper-reset"
@@ -60,7 +57,7 @@ export class Dropdown implements OnInit,AfterViewInit,AfterViewChecked,DoCheck,O
 
     @Input() filter: boolean;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
     
@@ -70,7 +67,7 @@ export class Dropdown implements OnInit,AfterViewInit,AfterViewChecked,DoCheck,O
     
     @Input() required: boolean;
     
-    @ContentChild(TemplateRef) itemTemplate: TemplateRef;
+    @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
     constructor(private el: ElementRef, private domHandler: DomHandler, private renderer: Renderer, differs: IterableDiffers) {
         this.differ = differs.find([]).create(null);
@@ -204,7 +201,7 @@ export class Dropdown implements OnInit,AfterViewInit,AfterViewChecked,DoCheck,O
     updateDimensions() {
         if(this.autoWidth) {
             let select = this.domHandler.findSingle(this.el.nativeElement, 'select');
-            if(!this.style||this.style.indexOf('width') == -1) {
+            if(!this.style||(!this.style['width']&&!this.style['min-width'])) {
                 this.el.nativeElement.children[0].style.width = select.offsetWidth + 30 + 'px';
             }
         }

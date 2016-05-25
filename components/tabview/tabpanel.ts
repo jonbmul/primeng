@@ -1,4 +1,4 @@
-import {Component,Input} from 'angular2/core';
+import {Component,Input} from '@angular/core';
 import {TabView} from './tabview';
 
 @Component({
@@ -19,7 +19,7 @@ export class TabPanel {
     
     @Input() closable: boolean;
     
-    @Input() headerStyle: string;
+    @Input() headerStyle: any;
     
     @Input() headerStyleClass: string;
     

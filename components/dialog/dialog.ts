@@ -1,4 +1,4 @@
-import {Component,ElementRef,AfterViewInit,AfterViewChecked,OnDestroy,Input,Output,EventEmitter,Renderer} from 'angular2/core';
+import {Component,ElementRef,AfterViewInit,AfterViewChecked,OnDestroy,Input,Output,EventEmitter,Renderer} from '@angular/core';
 import {DomHandler} from '../dom/domhandler';
 
 @Component({
@@ -14,11 +14,11 @@ import {DomHandler} from '../dom/domhandler';
                     <span class="fa fa-fw fa-close"></span>
                 </a>
             </div>
-            <div class="ui-dialog-content ui-widget-content">
+            <div class="ui-dialog-content ui-widget-content" [style.height.px]="contentHeight">
                 <ng-content></ng-content>
             </div>
             <ng-content select="footer"></ng-content>
-            <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"
+            <div *ngIf="resizable" class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"
                 (mousedown)="initResize($event)"></div>
         </div>
     `,
@@ -39,6 +39,8 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
     @Input() width: any;
 
     @Input() height: any;
+    
+    @Input() contentHeight: any;
 
     @Input() modal: boolean;
 
@@ -85,6 +87,8 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
     mask: any;
     
     shown: boolean;
+    
+    contentContainer: any;
             
     constructor(private el: ElementRef, private domHandler: DomHandler, private renderer: Renderer) {}
     
@@ -96,7 +100,7 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
         this._visible = val;
         
         if(this._visible) {
-            this.onBeforeShow.emit(event);
+            this.onBeforeShow.emit({});
             
             this.el.nativeElement.children[0].style.zIndex = ++DomHandler.zindex;
             
@@ -115,6 +119,7 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
     }
     
     ngAfterViewInit() {
+        this.contentContainer = this.domHandler.findSingle(this.el.nativeElement, '.ui-dialog-content');
         this.center();
         
         if(this.draggable) {
@@ -154,7 +159,7 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
     
     ngAfterViewChecked() {
         if(this.shown) {
-            this.onAfterShow.emit(event);
+            this.onAfterShow.emit({});
             this.shown = false;
         }
     }
@@ -250,15 +255,15 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
             let containerWidth = this.domHandler.getOuterWidth(container);
-            let containerHeight = this.domHandler.getOuterHeight(container);
+            let contentHeight = this.domHandler.getHeight(this.contentContainer);
             let newWidth = containerWidth + deltaX;
-            let newHeight = containerHeight + deltaY;
+            let newHeight = contentHeight + deltaY;
 
             if(newWidth > this.minWidth)
-                container.style.width = containerWidth + deltaX + 'px';
+                container.style.width = newWidth + 'px';
                 
             if(newHeight > this.minHeight)
-                container.style.height = containerHeight + deltaY + 'px';
+                this.contentContainer.style.height = newHeight + 'px';
             
             this.lastPageX = event.pageX;
             this.lastPageY = event.pageY;
@@ -281,7 +286,7 @@ export class Dialog implements AfterViewInit,AfterViewChecked,OnDestroy {
             this.documentResponsiveListener();
         }
         
-        if(this.closeOnEscape) {
+        if(this.closeOnEscape && this.closable) {
             this.documentEscapeListener();
         }
     }

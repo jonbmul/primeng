@@ -1,6 +1,6 @@
-import {Component,Input,Output,EventEmitter,Inject,forwardRef,Host} from 'angular2/core';
+import {Component,Input,Output,EventEmitter,Inject,forwardRef,Host} from '@angular/core';
 import {Tree} from '../tree/tree';
-import {TreeNode} from '../api/treenode';
+import {TreeNode} from '../common';
 import {TreeNodeTemplateLoader} from './treenodetemplateloader';
 
 @Component({
@@ -20,7 +20,7 @@ import {TreeNodeTemplateLoader} from './treenodetemplateloader';
                     </span>
             </div>
             <ul class="ui-treenode-children" style="display: none;" *ngIf="node.children" [style.display]="expanded ? 'block' : 'none'">
-                <p-treeNode *ngFor="#childNode of node.children" [node]="childNode"></p-treeNode>
+                <p-treeNode *ngFor="let childNode of node.children" [node]="childNode"></p-treeNode>
             </ul>
         </li>
     `,

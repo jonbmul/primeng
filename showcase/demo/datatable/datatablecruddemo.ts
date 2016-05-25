@@ -1,6 +1,6 @@
-import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {HTTP_PROVIDERS}    from 'angular2/http';
+import {Component,OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
+import {HTTP_PROVIDERS}    from '@angular/http';
 import {DataTable} from '../../../components/datatable/datatable';
 import {Button} from '../../../components/button/button';
 import {InputText} from '../../../components/inputtext/inputtext';
@@ -12,8 +12,8 @@ import {Car} from '../domain/car';
 import {Column} from '../../../components/column/column';
 import {DataTableSubmenu} from './datatablesubmenu.component';
 import {CarService} from '../service/carservice';
-import {Header} from '../../../components/common/header';
-import {Footer} from '../../../components/common/footer';
+import {Header} from '../../../components/common';
+import {Footer} from '../../../components/common';
 
 @Component({
     templateUrl: 'showcase/demo/datatable/datatablecruddemo.html',

@@ -1,6 +1,6 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
-import {TreeNode} from '../../../components/api/treenode';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {TreeNode} from '../../../components/common';
 
 @Injectable()
 export class NodeService {

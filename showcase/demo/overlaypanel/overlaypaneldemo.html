@@ -1,7 +1,7 @@
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">OverlayPanel</span>
-        <span class="defaultText dispTable">OverlayPanel is a container component that can overlay other components on page.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">OverlayPanel</span>
+        <span class="defaultText">OverlayPanel is a container component that can overlay other components on page.</span>
     </div>
 </div>
 
@@ -19,7 +19,7 @@
     <i class="fa fa-search" (mouseenter)="op2.show($event)" style="font-size:24px"></i>
     
     <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false">
-        <p-dataTable [value]="cars1" style="width:500px">
+        <p-dataTable [value]="cars1" [style]="{'width':'500px'}">
             <p-column field="vin" header="Vin" [sortable]="true"></p-column>
             <p-column field="year" header="Year" [sortable]="true"></p-column>
             <p-column field="brand" header="Brand" [sortable]="true"></p-column>
@@ -29,8 +29,8 @@
     
     <h3>DataTable Integration</h3>
     <p-dataTable [value]="cars2">
-        <p-column style="width:10%;text-align:center" header="Logo">
-            <template #car="rowData">
+        <p-column [style]="{'width':'10%','text-align':'center'}" header="Logo">
+            <template let-car="rowData">
                 <button type="button" pButton (click)="selectCar($event,car,op3);" icon="fa-search"></button>
             </template>
         </p-column>
@@ -63,7 +63,7 @@ import {OverlayPanel} from 'primeng/primeng';
     Content
 &lt;/p-overlayPanel&gt;
 
-&lt;button type="text" pButton label="Basic" (click)="op1.toggle($event)"&gt;&lt;/button&gt;
+&lt;button type="text" pButton label="Basic" (click)="op.toggle($event)"&gt;&lt;/button&gt;
 </code>
 </pre>
             <h3>Show and Hide</h3>
@@ -76,7 +76,7 @@ import {OverlayPanel} from 'primeng/primeng';
     Content
 &lt;/p-overlayPanel&gt;
 
-&lt;button type="text" pButton label="Custom Target" (click)="op1.show($event, actualTarget)"&gt;&lt;/button&gt;
+&lt;button type="text" pButton label="Custom Target" (click)="op.show($event, actualTarget)"&gt;&lt;/button&gt;
 &lt;div #actualTarget&gt;&lt;/div&gt;
 </code>
 </pre>
@@ -203,7 +203,7 @@ import {OverlayPanel} from 'primeng/primeng';
             </div>
             
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -249,7 +249,7 @@ import {OverlayPanel} from 'primeng/primeng';
 &lt;i class="fa fa-search" (mouseenter)="op2.show($event)" style="font-size:24px"&gt;&lt;/i&gt;
 
 &lt;p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false"&gt;
-    &lt;p-dataTable [value]="cars1" style="width:500px"&gt;
+    &lt;p-dataTable [value]="cars1" [style]="{'width':'500px'}"&gt;
         &lt;p-column field="vin" header="Vin" [sortable]="true"&gt;&lt;/p-column&gt;
         &lt;p-column field="year" header="Year" [sortable]="true"&gt;&lt;/p-column&gt;
         &lt;p-column field="brand" header="Brand" [sortable]="true"&gt;&lt;/p-column&gt;
@@ -259,8 +259,8 @@ import {OverlayPanel} from 'primeng/primeng';
 
 &lt;h3&gt;DataTable Integration&lt;/h3&gt;
 &lt;p-dataTable [value]="cars2"&gt;
-    &lt;p-column style="width:10%;text-align:center" header="Logo"&gt;
-        &lt;template #car="rowData"&gt;
+    &lt;p-column [style]="{'width':'10%','text-align':'center'}" header="Logo"&gt;
+        &lt;template let-car="rowData"&gt;
             &lt;button type="button" pButton (click)="selectCar($event,car,op3);" icon="fa-search"&gt;&lt;/button&gt;
         &lt;/template&gt;
     &lt;/p-column&gt;

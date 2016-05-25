@@ -1,4 +1,4 @@
-import {Directive,ElementRef,AfterViewInit,OnDestroy,HostBinding,HostListener,Input} from 'angular2/core';
+import {Directive,ElementRef,AfterViewInit,OnDestroy,HostBinding,HostListener,Input} from '@angular/core';
 import {DomHandler} from '../dom/domhandler';
 
 @Directive({
@@ -83,7 +83,7 @@ export class Button implements AfterViewInit, OnDestroy {
     getStyleClass(): string {
         let styleClass = 'ui-button ui-widget ui-state-default ui-corner-all';
         if(this.icon) {
-            if(this.label) {
+            if(this.label != null && this.label != undefined) {
                 if(this.iconPos == 'left')
                     styleClass = styleClass + ' ui-button-text-icon-left';
                 else

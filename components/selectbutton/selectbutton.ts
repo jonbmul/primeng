@@ -1,20 +1,17 @@
-import {Component,Input,Output,EventEmitter,forwardRef,Provider} from 'angular2/core';
-import {SelectItem} from '../api/selectitem';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {Component,Input,Output,EventEmitter,forwardRef,Provider} from '@angular/core';
+import {SelectItem} from '../common';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
-const SELECTBUTTON_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => SelectButton),
-        multi: true
-    })
-);
+const SELECTBUTTON_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => SelectButton),
+    multi: true
+});
 
 @Component({
     selector: 'p-selectButton',
     template: `
-        <div [ngClass]="'ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-' + options.length" (mouseleave)="hoveredItem=null" [attr.style]="style" [class]="styleClass">
-            <div *ngFor="#option of options;" class="ui-button ui-widget ui-state-default ui-button-text-only"
+        <div [ngClass]="'ui-selectbutton ui-buttonset ui-widget ui-corner-all ui-buttonset-' + options.length" (mouseleave)="hoveredItem=null" [ngStyle]="style" [class]="styleClass">
+            <div *ngFor="let option of options;" class="ui-button ui-widget ui-state-default ui-button-text-only"
                 [ngClass]="{'ui-state-hover': hoveredItem == option,'ui-state-active':isSelected(option)}"
                 (mouseenter)="hoveredItem=option" (click)="onItemClick($event,option)">
                 <span class="ui-button-text ui-c">{{option.label}}</span>
@@ -31,7 +28,7 @@ export class SelectButton implements ControlValueAccessor {
 
     @Input() multiple: boolean;
     
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
 

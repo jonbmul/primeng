@@ -1,12 +1,12 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Accordion} from '../../../components/accordion/accordion';
 import {AccordionTab} from '../../../components/accordion/accordiontab';
 import {Growl} from '../../../components/growl/growl';
 import {CodeHighlighter} from '../../../components/codehighlighter/codehighlighter';
 import {TabView} from '../../../components/tabview/tabview';
 import {TabPanel} from '../../../components/tabview/tabpanel';
-import {Message} from '../../../components/api/message';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Message} from '../../../components/common';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
     templateUrl: 'showcase/demo/accordion/accordiondemo.html',

@@ -1,25 +1,22 @@
-import {Component,ElementRef,AfterViewInit,OnDestroy,OnChanges,Input,Output,SimpleChange,EventEmitter,forwardRef,Provider,NgZone} from 'angular2/core';
+import {Component,ElementRef,AfterViewInit,OnDestroy,OnChanges,Input,Output,SimpleChange,EventEmitter,forwardRef,Provider,NgZone} from '@angular/core';
 import {Button} from '../button/button';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
-const CALENDAR_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => Calendar),
-        multi: true
-    })
-);
+const CALENDAR_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Calendar),
+    multi: true
+});
 
 @Component({
     selector: 'p-calendar',
     template:  `
-        <span [attr.style]="style" [class]="styleClass" [ngClass]="'ui-calendar'" *ngIf="!inline">
-        <input #in type="text" [attr.placeholder]="placeholder" [attr.style]="inputStyle" [class]="inputStyleClass"
+        <span [ngStyle]="style" [class]="styleClass" [ngClass]="'ui-calendar'" *ngIf="!inline">
+        <input #in type="text" [attr.placeholder]="placeholder" [ngStyle]="inputStyle" [class]="inputStyleClass"
                 [value]="value||''" (input)="onInput($event)" [readonly]="readonlyInput"
                 [disabled]="disabled" (mouseenter)="hovered=true" (mouseleave)="hovered=false" (focus)="focused=true" (blur)="handleBlur($event)"
                 [ngClass]="{'ui-inputtext ui-widget ui-state-default': true, 'ui-corner-all': !showIcon, 'ui-corner-left': showIcon,
                     'ui-state-hover':hovered,'ui-state-focus':focused,'ui-state-disabled':disabled}"
-        ><button type="button" icon="fa-calendar" pButton *ngIf="showIcon" (click)="onButtonClick($event,in)" class="ui-datepicker-trigger"></button></span>
+        ><button type="button" [icon]="icon" pButton *ngIf="showIcon" (click)="onButtonClick($event,in)" class="ui-datepicker-trigger"></button></span>
         <div *ngIf="inline"></div>
     `,
     directives: [Button],
@@ -29,11 +26,11 @@ export class Calendar implements AfterViewInit,OnChanges,OnDestroy,ControlValueA
 
     @Input() readonlyInput: boolean;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
     
-    @Input() inputStyle: string;
+    @Input() inputStyle: any;
 
     @Input() inputStyleClass: string;
 
@@ -108,6 +105,8 @@ export class Calendar implements AfterViewInit,OnChanges,OnDestroy,ControlValueA
     @Input() timezoneList: string[];
     
     @Input() locale: any;
+    
+    @Input() icon: string = 'fa-calendar';
     
     @Output() onBlur: EventEmitter<any> = new EventEmitter();
     

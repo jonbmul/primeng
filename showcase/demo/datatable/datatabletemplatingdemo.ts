@@ -1,6 +1,6 @@
-import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {HTTP_PROVIDERS}    from 'angular2/http';
+import {Component,OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
+import {HTTP_PROVIDERS}    from '@angular/http';
 import {DataTable} from '../../../components/datatable/datatable';
 import {Column} from '../../../components/column/column';
 import {Button} from '../../../components/button/button';
@@ -11,7 +11,7 @@ import {TabPanel} from '../../../components/tabview/tabpanel';
 import {Car} from '../domain/car';
 import {DataTableSubmenu} from './datatablesubmenu.component';
 import {CarService} from '../service/carservice';
-import {Message} from '../../../components/api/message';
+import {Message} from '../../../components/common';
 
 @Component({
     templateUrl: 'showcase/demo/datatable/datatabletemplatingdemo.html',

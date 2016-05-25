@@ -1,11 +1,11 @@
-import {Component,ElementRef,DoCheck,Input,Output,ContentChild,TemplateRef,EventEmitter} from 'angular2/core';
+import {Component,ElementRef,DoCheck,Input,Output,ContentChild,TemplateRef,EventEmitter} from '@angular/core';
 import {Button} from '../button/button';
 import {DomHandler} from '../dom/domhandler';
 
 @Component({
     selector: 'p-orderList',
     template: `
-        <div [ngClass]="{'ui-orderlist ui-grid ui-widget':true,'ui-grid-responsive':responsive}" [attr.style]="style" [class]="styleClass">
+        <div [ngClass]="{'ui-orderlist ui-grid ui-widget':true,'ui-grid-responsive':responsive}" [ngStyle]="style" [class]="styleClass">
             <div class="ui-grid-row">
                 <div class="ui-orderlist-controls ui-grid-col-2">
                     <button type="button" pButton icon="fa-angle-up" (click)="moveUp($event,listelement)"></button>
@@ -15,7 +15,7 @@ import {DomHandler} from '../dom/domhandler';
                 </div>
                 <div class="ui-grid-col-10">
                     <div class="ui-orderlist-caption ui-widget-header ui-corner-top" *ngIf="header">{{header}}</div>
-                    <ul #listelement class="ui-widget-content ui-orderlist-list ui-corner-bottom" [attr.style]="listStyle" 
+                    <ul #listelement class="ui-widget-content ui-orderlist-list ui-corner-bottom" [ngStyle]="listStyle" 
                         (mouseover)="onMouseover($event)" (mouseout)="onMouseout($event)" (click)="onClick($event)">
                         <template ngFor [ngForOf]="value" [ngForTemplate]="itemTemplate"></template>
                     </ul>
@@ -32,17 +32,17 @@ export class OrderList {
     
     @Input() header: string;
     
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
     
-    @Input() listStyle: string;
+    @Input() listStyle: any;
     
     @Input() responsive: boolean;
     
     @Output() onReorder: EventEmitter<any> = new EventEmitter();
 
-    @ContentChild(TemplateRef) itemTemplate: TemplateRef;
+    @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
         
     constructor(private el: ElementRef, private domHandler: DomHandler) {}
             

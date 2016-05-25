@@ -1,14 +1,14 @@
-import {Component,ElementRef,OnInit,AfterViewInit,DoCheck,OnDestroy,Input,Output,EventEmitter,IterableDiffers,ChangeDetectorRef,NgZone} from 'angular2/core';
+import {Component,ElementRef,OnInit,AfterViewInit,DoCheck,OnDestroy,Input,Output,EventEmitter,IterableDiffers,ChangeDetectorRef,NgZone} from '@angular/core';
 
 declare var google: any;
 
 @Component({
     selector: 'p-gmap',
-    template: `<div [attr.style]="style" [class]="styleClass"></div>`
+    template: `<div [ngStyle]="style" [class]="styleClass"></div>`
 })
 export class GMap implements AfterViewInit,DoCheck {
 
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
     

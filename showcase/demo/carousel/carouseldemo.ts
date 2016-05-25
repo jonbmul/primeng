@@ -1,12 +1,12 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Carousel} from '../../../components/carousel/carousel';
 import {CodeHighlighter} from '../../../components/codehighlighter/codehighlighter';
 import {TabView} from '../../../components/tabview/tabview';
 import {TabPanel} from '../../../components/tabview/tabpanel';
 import {Button} from '../../../components/button/button';
 import {Growl} from '../../../components/growl/growl';
-import {Message} from '../../../components/api/message';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Message} from '../../../components/common';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {Car} from '../domain/car';
 
 @Component({
@@ -46,7 +46,7 @@ export class CarouselDemo {
             {vin: 'he6sb5v', year: 2015, brand: 'Ford', color: 'Black'}
         ];
     }
-
+        
     selectCar(car: Car) {
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'Car Selected', detail: 'Vin:' + car.vin});

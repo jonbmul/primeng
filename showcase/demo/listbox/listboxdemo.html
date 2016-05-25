@@ -1,7 +1,7 @@
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">Listbox</span>
-        <span class="defaultText dispTable">Listbox is used to select one or more values from a list of items.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">Listbox</span>
+        <span class="defaultText">Listbox is used to select one or more values from a list of items.</span>
     </div>
 </div>
 
@@ -13,11 +13,11 @@
 
     <h3>Multiple</h3>
     <p-listbox [options]="cities" [(ngModel)]="selectedCities" multiple="multiple"></p-listbox>
-    <p>Selected Cities: <span *ngFor="#c of selectedCities">{{c}} &nbsp;</span></p>
+    <p>Selected Cities: <span *ngFor="let c of selectedCities">{{c}} &nbsp;</span></p>
 
     <h3>Content</h3>
-    <p-listbox [options]="cars" [(ngModel)]="selectedCar" style="width:190px;max-height:250px">
-        <template #car>
+    <p-listbox [options]="cars" [(ngModel)]="selectedCar" [style]="{'width':'190px','max-height':'250px'}">
+        <template let-car>
             <li class="ui-listbox-item ui-helper-clearfix">
                 <img src="showcase/resources/demo/images/car/{{car.label}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/>
                 <div style="font-size:20px;float:right;margin:15px 10px 0 0">{{car.value}}</div>
@@ -116,7 +116,7 @@ export class MyModel {
 <pre>
 <code class="language-markup" pCode ngNonBindable>
 &lt;p-listbox [options]="cars" [(ngModel)]="selectedCar" style="width:190px"&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-listbox-item ui-helper-clearfix"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{car.label}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:20px;float:right;margin:15px 10px 0 0"&gt;{{car.value}}&lt;/div&gt;
@@ -222,7 +222,7 @@ export class MyModel {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -262,11 +262,11 @@ export class MyModel {
 
 &lt;h3&gt;Multiple&lt;/h3&gt;
 &lt;p-listbox [options]="cities" [(ngModel)]="selectedCities" multiple="multiple"&gt;&lt;/p-listbox&gt;
-&lt;p&gt;Selected Cities: &lt;span *ngFor="#c of selectedCities"&gt;{{c}} &nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Selected Cities: &lt;span *ngFor="let c of selectedCities"&gt;{{c}} &nbsp;&lt;/span&gt;&lt;/p&gt;
 
 &lt;h3&gt;Content&lt;/h3&gt;
-&lt;p-listbox [options]="cars" [(ngModel)]="selectedCar" style="width:190px;max-height:250px"&gt;
-    &lt;template #car&gt;
+&lt;p-listbox [options]="cars" [(ngModel)]="selectedCar" [style]="{'width':'190px','max-height':'250px'}"&gt;
+    &lt;template let-car&gt;
         &lt;li class="ui-listbox-item ui-helper-clearfix"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{car.label}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:20px;float:right;margin:15px 10px 0 0"&gt;{{car.value}}&lt;/div&gt;

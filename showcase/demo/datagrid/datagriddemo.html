@@ -1,9 +1,9 @@
 <datatable-demos></datatable-demos>
 
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">DataGrid</span>
-        <span class="defaultText dispTable">DataGrid displays data in grid format.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">DataGrid</span>
+        <span class="defaultText">DataGrid displays data in grid format.</span>
     </div>
 </div>
 
@@ -12,9 +12,9 @@
         <header>
             List of Cars
         </header>
-        <template #car>
+        <template let-car>
             <div style="padding:3px">
-                <p-panel [header]="car.vin" [paginator]="true" style="text-align:center">
+                <p-panel [header]="car.vin" [paginator]="true" [style]="{'text-align':'center'}">
                     <img src="showcase/resources/demo/images/car/{{car.brand}}.gif">
                     <div class="car-detail">{{car.year}} - {{car.color}}</div>
                     <hr class="ui-widget-content" style="border-top:0">
@@ -112,7 +112,7 @@ export class DataGridDemo implements OnInit {
 <pre>
 <code class="language-markup" pCode>
 &lt;p-dataGrid [value]="cars" [columns]="3"&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div&gt;
             Car content
         &lt;/div&gt;
@@ -134,7 +134,7 @@ import {Footer} from 'primeng/primeng';
 &lt;p-dataGrid [value]="cars" [columns]="5"&gt;
     &lt;header&gt;List of Cars&lt;/header&gt;
     &lt;footer&gt;Choose from the list.&lt;/footer&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div&gt;
             Car content
         &lt;/div&gt;
@@ -149,7 +149,7 @@ import {Footer} from 'primeng/primeng';
 <pre>
 <code class="language-markup" pCode>
 &lt;p-dataGrid [value]="cars" [columns]="3" [paginator]="true" [rows]="9"&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div&gt;
             Car content
         &lt;/div&gt;
@@ -167,7 +167,7 @@ import {Footer} from 'primeng/primeng';
 <pre>
 <code class="language-markup" pCode>
 &lt;p-dataGrid [value]="cars" [columns]="3" [paginator]="true" [rows]="9" [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords"&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div&gt;
             Car content
         &lt;/div&gt;
@@ -286,7 +286,7 @@ loadData(event) {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -327,9 +327,9 @@ loadData(event) {
     &lt;header&gt;
         List of Cars
     &lt;/header&gt;
-    &lt;template #car&gt;
+    &lt;template let-car&gt;
         &lt;div style="padding:3px"&gt;
-            &lt;p-panel [header]="car.vin" [paginator]="true" style="text-align:center"&gt;
+            &lt;p-panel [header]="car.vin" [paginator]="true" [style]="{'text-align':'center'}"&gt;
                 &lt;img src="showcase/resources/demo/images/car/{{car.brand}}.gif"&gt;
                 &lt;div class="car-detail"&gt;{{car.year}} - {{car.color}}&lt;/div&gt;
                 &lt;hr class="ui-widget-content" style="border-top:0"&gt;

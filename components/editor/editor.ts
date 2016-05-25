@@ -1,22 +1,19 @@
-import {Component,ElementRef,AfterViewInit,OnDestroy,Input,Output,EventEmitter,ContentChild,OnChanges,SimpleChange,forwardRef,Provider} from 'angular2/core';
-import {Header} from '../common/header'
+import {Component,ElementRef,AfterViewInit,OnDestroy,Input,Output,EventEmitter,ContentChild,OnChanges,SimpleChange,forwardRef,Provider} from '@angular/core';
+import {Header} from '../common'
 import {DomHandler} from '../dom/domhandler';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
 declare var Quill: any;
 
-const EDITOR_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => Editor),
-        multi: true
-    })
-);
+const EDITOR_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Editor),
+    multi: true
+});
 
 @Component({
     selector: 'p-editor',
     template: `
-        <div [ngClass]="'ui-widget ui-editor-container ui-widget-content ui-corner-all'" [attr.style]="style" [class]="styleClass">
+        <div [ngClass]="'ui-widget ui-editor-container ui-widget-content ui-corner-all'" [ngStyle]="style" [class]="styleClass">
             <div class="ui-editor-toolbar ui-widget-header ui-corner-top" *ngIf="toolbar">
                 <ng-content select="header"></ng-content>
             </div>
@@ -150,7 +147,7 @@ export class Editor implements AfterViewInit,OnDestroy,ControlValueAccessor {
     
     @ContentChild(Header) toolbar;
     
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
     

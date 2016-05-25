@@ -1,24 +1,22 @@
-import {Component,Input,Output,EventEmitter,forwardRef,Provider} from 'angular2/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {Component,Input,Output,EventEmitter,forwardRef,Provider} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
-const CHECKBOX_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => Checkbox),
-        multi: true
-    })
-);
+const CHECKBOX_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Checkbox),
+    multi: true
+});
 
 @Component({
     selector: 'p-checkbox',
     template: `
         <div class="ui-chkbox ui-widget">
             <div class="ui-helper-hidden-accessible">
-                <input #cb type="checkbox" name="{{name}}" value="{{value}}" [checked]="checked" (blur)="onModelTouched()">
+                <input #cb type="checkbox" name="{{name}}" value="{{value}}" [checked]="checked" (focus)="onFocus($event)" (blur)="onBlur($event)"
+                [ngClass]="{'ui-state-focus':focused}" (keydown.space)="onClick($event,cb,false)">
             </div>
-            <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" (click)="onClick()"
+            <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default" (click)="onClick($event,cb,true)"
                         (mouseover)="hover=true" (mouseout)="hover=false" 
-                        [ngClass]="{'ui-state-hover':hover&&!disabled,'ui-state-active':checked,'ui-state-disabled':disabled}">
+                        [ngClass]="{'ui-state-hover':hover&&!disabled,'ui-state-active':checked,'ui-state-disabled':disabled,'ui-state-focus':focused}">
                 <span class="ui-chkbox-icon ui-c" [ngClass]="{'fa fa-fw fa-check':checked}"></span>
             </div>
         </div>
@@ -43,9 +41,13 @@ export class Checkbox implements ControlValueAccessor {
     
     hover: boolean;
     
+    focused: boolean = false;
+    
     checked: boolean = false;
 
-    onClick() {
+    onClick(event,checkbox,focus:boolean) {
+        event.preventDefault();
+        
         if(this.disabled) {
             return;
         }
@@ -65,6 +67,10 @@ export class Checkbox implements ControlValueAccessor {
         }
         
         this.onChange.emit(this.checked);
+        
+        if(focus) {
+            checkbox.focus();
+        }
     }
 
     isChecked(): boolean {
@@ -83,6 +89,15 @@ export class Checkbox implements ControlValueAccessor {
 
     addValue(value) {
         this.model.push(value);
+    }
+    
+    onFocus(event) {
+        this.focused = true;
+    }
+
+    onBlur(event) {
+        this.focused = false;
+        this.onModelTouched();
     }
 
     findValueIndex(value) {

@@ -1,6 +1,6 @@
-import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {HTTP_PROVIDERS}    from 'angular2/http';
+import {Component,OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
+import {HTTP_PROVIDERS}    from '@angular/http';
 import {DataTable} from '../../../components/datatable/datatable';
 import {CodeHighlighter} from '../../../components/codehighlighter/codehighlighter';
 import {TabView} from '../../../components/tabview/tabview';
@@ -32,9 +32,5 @@ export class DataTableDemo implements OnInit {
             {field: 'brand', header: 'Brand'},
             {field: 'color', header: 'Color'}
         ];
-    }
-    
-    dragStart($event,car: Car) {
-        console.log(car);
     }
 }

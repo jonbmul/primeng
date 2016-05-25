@@ -1,7 +1,7 @@
 <div class="ContentSideSections">
-    <div class="Content100 overHidden TextShadow">
-        <span class="fontSize30 TextShadow orange mediumFont marginBottom20 dispBlock">AutoComplete</span>
-        <span class="defaultText dispTable">AutoComplete is an input component that provides real-time suggestions when being typed.</span>
+    <div>
+        <span class="fontSize30 TextShadow orange marginBottom20 dispBlock">AutoComplete</span>
+        <span class="defaultText">AutoComplete is an input component that provides real-time suggestions when being typed.</span>
     </div>
 </div>
 
@@ -14,7 +14,7 @@
     <h3>Advanced</h3>
     <p-autoComplete [(ngModel)]="brand" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)" [size]="30"
         [minLength]="1" placeholder="Hint: type 'v' or 'f'" [dropdown]="true" (onDropdownClick)="handleDropdownClick($event)">
-        <template #brand>
+        <template let-brand>
             <li class="ui-autocomplete-list-item ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
                 <img src="showcase/resources/demo/images/car/{{brand}}.gif" style="width:32px;display:inline-block;margin:2px 0 2px 2px"/>
                 <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{brand}}</div>
@@ -24,11 +24,11 @@
     <span style="margin-left:50px">Brand: {{brand||'none'}}</span>
     
     <h3>Multiple</h3>
-    <p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" style="width:100%"
+    <p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" styleClass="wid100"
         [minLength]="1" placeholder="Countries" field="name" [multiple]="true">
     </p-autoComplete>
     <ul>
-        <li *ngFor="#c of countries">{{c.name}}</li>
+        <li *ngFor="let c of countries">{{c.name}}</li>
     </ul>
 </div>
 
@@ -167,7 +167,7 @@ export class AutoCompleteDemo {
 <pre>
 <code class="language-markup" pCode ngNonBindable>
 &lt;p-autoComplete [(ngModel)]="brand" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)"&gt;
-    &lt;template #brand&gt;
+    &lt;template let-brand&gt;
         &lt;li class="ui-autocomplete-list-item ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:20px;float:right;margin:15px 10px 0 0"&gt;{{brand}}&lt;/div&gt;
@@ -335,7 +335,7 @@ export class AutoCompleteDemo {
             </div>
 
             <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['Theming']">theming page</a>.</p>
+            <p>Following is the list of structural style classes, for theming classes visit <a href="#" [routerLink]="['/theming']">theming page</a>.</p>
             <div class="doc-tablewrapper">
                 <table class="doc-table">
                     <thead>
@@ -392,7 +392,7 @@ export class AutoCompleteDemo {
 &lt;h3&gt;Advanced&lt;/h3&gt;
 &lt;p-autoComplete [(value)]="ngModel" [suggestions]="filteredBrands" (completeMethod)="filterBrands($event)" [size]="30"
     [minLength]="1" placeholder="Hint: type 'v' or 'f'" [dropdown]="true" (onDropdownClick)="handleDropdownClick($event)"&gt;
-    &lt;template #brand&gt;
+    &lt;template let-brand&gt;
         &lt;li class="ui-autocomplete-list-item ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5"&gt;
             &lt;img src="showcase/resources/demo/images/car/{{brand}}.gif" style="width:32px;display:inline-block;margin:2px 0 2px 2px"/&gt;
             &lt;div style="font-size:18px;float:right;margin:10px 10px 0 0"&gt;{{brand}}&lt;/div&gt;
@@ -402,11 +402,11 @@ export class AutoCompleteDemo {
 &lt;span style="margin-left:50px"&gt;Brand: {{brand||'none'}}&lt;/span&gt;
 
 &lt;h3&gt;Multiple&lt;/h3&gt;
-&lt;p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" style="width:100%"
+&lt;p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" styleClass="wid100"
     [minLength]="1" placeholder="Countries" field="name" [multiple]="true"&gt;
 &lt;/p-autoComplete&gt;
 &lt;ul&gt;
-    &lt;li *ngFor="#c of countries"&gt;{{c.name}}&lt;/li&gt;
+    &lt;li *ngFor="let c of countries"&gt;{{c.name}}&lt;/li&gt;
 &lt;/ul&gt;
 </code>
 </pre>

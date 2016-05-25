@@ -1,12 +1,12 @@
-import {Component,ElementRef,AfterViewInit,OnDestroy,DoCheck,Input,Output,Renderer,EventEmitter,ContentChild,IterableDiffers,TemplateRef} from 'angular2/core';
-import {Header} from '../common/header';
-import {Footer} from '../common/footer';
+import {Component,ElementRef,AfterViewInit,OnDestroy,DoCheck,Input,Output,Renderer,EventEmitter,ContentChild,IterableDiffers,TemplateRef} from '@angular/core';
+import {Header} from '../common';
+import {Footer} from '../common';
 import {DomHandler} from '../dom/domhandler';
 
 @Component({
     selector: 'p-dataScroller',
     template: `
-    <div [ngClass]="{'ui-datascroller ui-widget': true, 'ui-datascroller-inline': inline}" [attr.style]="style" [class]="styleClass">
+    <div [ngClass]="{'ui-datascroller ui-widget': true, 'ui-datascroller-inline': inline}" [ngStyle]="style" [class]="styleClass">
         <div class="ui-datascroller-header ui-widget-header ui-corner-top" *ngIf="header">
             <ng-content select="header"></ng-content>
         </div>
@@ -32,7 +32,7 @@ export class DataScroller implements AfterViewInit,DoCheck,OnDestroy {
     
     @Output() onLazyLoad: EventEmitter<any> = new EventEmitter();
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
     
@@ -46,7 +46,7 @@ export class DataScroller implements AfterViewInit,DoCheck,OnDestroy {
 
     @ContentChild(Footer) footer;
     
-    @ContentChild(TemplateRef) itemTemplate: TemplateRef;
+    @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
     
     @Input() loader: any;
 

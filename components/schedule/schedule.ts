@@ -1,10 +1,10 @@
-import {Component,ElementRef,AfterViewInit,OnDestroy,DoCheck,Input,Output,EventEmitter,IterableDiffers} from 'angular2/core';
-import {SelectItem} from '../api/selectitem';
+import {Component,ElementRef,AfterViewInit,OnDestroy,DoCheck,Input,Output,EventEmitter,IterableDiffers} from '@angular/core';
+import {SelectItem} from '../common';
 
 @Component({
     selector: 'p-schedule',
     template: `
-        <div [attr.style]="style" [class]="styleClass"></div>
+        <div [ngStyle]="style" [class]="styleClass"></div>
     `
 })
 export class Schedule {
@@ -13,7 +13,7 @@ export class Schedule {
     
     @Input() header: any;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
     
@@ -97,6 +97,8 @@ export class Schedule {
     
     @Output() onEventResize: EventEmitter<any> = new EventEmitter();
     
+    @Output() viewRender: EventEmitter<any> = new EventEmitter();
+    
     initialized: boolean;
     
     stopNgOnChangesPropagation: boolean;
@@ -169,7 +171,7 @@ export class Schedule {
                 });
             },
             eventMouseout: (calEvent, jsEvent, view) => {
-                this.onEventMouseover.emit({
+                this.onEventMouseout.emit({
                     'calEvent': calEvent,
                     'jsEvent': jsEvent,
                     'view': view
@@ -190,7 +192,7 @@ export class Schedule {
                 });
             },
             eventDrop: (event, delta, revertFunc, jsEvent, ui, view) => {
-                this.onEventDragStop.emit({
+                this.onEventDrop.emit({
                     'event': event,
                     'delta': delta,
                     'revertFunc': revertFunc,
@@ -220,6 +222,12 @@ export class Schedule {
                     'jsEvent': jsEvent,
                     'view': view
                 });
+            },
+            viewRender: (view, element) => {
+                this.viewRender.emit({
+                    'view': view,
+                    'element': element                    
+                });
             }
         };
         
@@ -236,7 +244,7 @@ export class Schedule {
     ngDoCheck() {
         let changes = this.differ.diff(this.events);
         
-        if(changes) {
+        if(this.schedule && changes) {
             this.schedule.fullCalendar('refetchEvents');
         }
     }

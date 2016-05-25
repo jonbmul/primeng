@@ -1,22 +1,19 @@
-import {Component,ElementRef,AfterViewChecked,Input,Output,EventEmitter,ContentChild,TemplateRef,IterableDiffers,forwardRef,Provider} from 'angular2/core';
-import {SelectItem} from '../api/selectitem';
+import {Component,ElementRef,AfterViewChecked,Input,Output,EventEmitter,ContentChild,TemplateRef,IterableDiffers,forwardRef,Provider} from '@angular/core';
+import {SelectItem} from '../common';
 import {DomHandler} from '../dom/domhandler';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from 'angular2/common';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/common';
 
-const LISTBOX_VALUE_ACCESSOR: Provider = CONST_EXPR(
-    new Provider(NG_VALUE_ACCESSOR, {
-        useExisting: forwardRef(() => Listbox),
-        multi: true
-    })
-);
+const LISTBOX_VALUE_ACCESSOR: Provider = new Provider(NG_VALUE_ACCESSOR, {
+    useExisting: forwardRef(() => Listbox),
+    multi: true
+});
 
 @Component({
     selector: 'p-listbox',
     template: `
-        <div [ngClass]="{'ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled}" [attr.style]="style" [class]="styleClass">
+        <div [ngClass]="{'ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all':true,'ui-state-disabled':disabled}" [ngStyle]="style" [class]="styleClass">
             <ul class="ui-listbox-list" *ngIf="!itemTemplate" (mouseover)="onMouseover($event)" (mouseout)="onMouseout($event)" (click)="onClick($event)">
-                <li *ngFor="#option of options" class="ui-listbox-item ui-corner-all">
+                <li *ngFor="let option of options" class="ui-listbox-item ui-corner-all">
                     {{option.label}}
                 </li>
             </ul>
@@ -33,7 +30,7 @@ export class Listbox implements AfterViewChecked,ControlValueAccessor {
 
     @Input() multiple: boolean;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
     
@@ -41,7 +38,7 @@ export class Listbox implements AfterViewChecked,ControlValueAccessor {
 
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     
-    @ContentChild(TemplateRef) itemTemplate: TemplateRef;
+    @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
     
     value: any;
     

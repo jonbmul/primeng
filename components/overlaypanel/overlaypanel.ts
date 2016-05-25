@@ -1,10 +1,10 @@
-import {Component,Input,Output,OnInit,OnDestroy,EventEmitter,Renderer,ElementRef} from 'angular2/core';
+import {Component,Input,Output,OnInit,OnDestroy,EventEmitter,Renderer,ElementRef} from '@angular/core';
 import {DomHandler} from '../dom/domhandler';
 
 @Component({
     selector: 'p-overlayPanel',
     template: `
-        <div [ngClass]="'ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow'" [attr.style]="style" [attr.styleClass]="styleClass"
+        <div [ngClass]="'ui-overlaypanel ui-widget ui-widget-content ui-corner-all ui-shadow'" [ngStyle]="style" [class]="styleClass"
             [style.display]="visible ? 'block' : 'none'" (click)="onPanelClick()">
             <div class="ui-overlaypanel-content">
                 <ng-content></ng-content>
@@ -21,7 +21,7 @@ export class OverlayPanel implements OnInit, OnDestroy {
 
     @Input() showCloseIcon: boolean;
 
-    @Input() style: string;
+    @Input() style: any;
 
     @Input() styleClass: string;
 

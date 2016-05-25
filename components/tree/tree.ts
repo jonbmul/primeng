@@ -1,13 +1,13 @@
-import {Component,Input,Output,EventEmitter,ContentChild,TemplateRef} from 'angular2/core';
-import {TreeNode} from '../api/treenode';
+import {Component,Input,Output,EventEmitter,ContentChild,TemplateRef} from '@angular/core';
+import {TreeNode} from '../common';
 import {UITreeNode} from './uitreenode';
 
 @Component({
     selector: 'p-tree',
     template: `
-        <div [ngClass]="'ui-tree ui-widget ui-widget-content ui-corner-all'" [attr.style]="style" [class]="styleClass">
+        <div [ngClass]="'ui-tree ui-widget ui-widget-content ui-corner-all'" [ngStyle]="style" [class]="styleClass">
             <ul class="ui-tree-container">
-                <p-treeNode *ngFor="#node of value" [node]="node"></p-treeNode>
+                <p-treeNode *ngFor="let node of value" [node]="node"></p-treeNode>
             </ul>
         </div>
     `,
@@ -31,11 +31,11 @@ export class Tree {
     
     @Output() onNodeCollapse: EventEmitter<any> = new EventEmitter();
     
-    @Input() style: string;
+    @Input() style: any;
         
     @Input() styleClass: string;
     
-    @ContentChild(TemplateRef) template: TemplateRef;
+    @ContentChild(TemplateRef) template: TemplateRef<any>;
     
     onNodeClick(event, node) {
         if(event.target.className&&event.target.className.indexOf('ui-tree-toggler') === 0) {
